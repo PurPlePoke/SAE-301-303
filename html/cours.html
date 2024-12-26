@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioData - Types et Pratiques</title>
+    <title>BioData - Cours</title>
     <link rel="stylesheet" href="../css/style.css">
+ 
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 </head>
 <body>
     <div class="stars"></div>
@@ -17,115 +20,132 @@
 
     <nav>
         <div class="logo">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-            </svg>
+            <video class="logo-video" autoplay loop muted>
+                <source src="../logo/logobiodata.mp4" type="video/mp4">
+            </video>
             BioData
         </div>
         <div class="nav-container">
             <div class="nav-links">
-                <a href="../html/index.html" class="active">Accueil</a>
-                <a href="../html/cours.html">Cours</a>
-                <a href="#">Analyses</a>
-                <a href="#">Quiz</a>
-                <a href="#">à propos</a>
-
+                <a href="../index.html">Accueil</a>
+                <a href="./analyse.html">Analyses</a>
+                <a href="./cours.html" class="active">Cours</a>
+                <a href="./quiz.html">Quiz</a>
             </div>
         </div>
-        <button class="register-btn">contact</button>
+        <a href="../html/contact.html" class="register-btn">contact</a>
     </nav>
+
     <div class="hero">
-        <h1>Types de Biocontrôle<br>et Applications</h1>
-        <p>Découvrez les différentes méthodes de protection biologique<br>et leurs impacts sur l'agriculture moderne.</p>
-    </div>
-
-    <div class="cross-section">
-        <div class="cross-lines"></div>
-        <div class="cross-icons">
-            <div class="cross-icon top">
-                <img src="path-to-insect-icon.svg" alt="Macro-organismes" width="50">
+        <h1>Qu'est ce que le Biocontrôle ?</h1>
+        
+        <div class="biocontrol-definition">
+            <p>Le biocontrôle est une approche naturelle qui s'inscrit dans une démarche durable de protection des cultures. Il repose sur l'utilisation d'organismes vivants ou de substances d'origine naturelle pour lutter contre les ravageurs, les maladies ou les mauvaises herbes. Ce type de gestion est considéré comme une alternative aux produits phytopharmaceutiques de synthèse afin de protéger la santé humaine.</p>
+        </div>
+    
+        <h2>Les différents types de biocontrôles</h2>
+        <div class="biocontrol-types">
+            <div class="cross-lines"></div>
+            <div class="type-circle top">
+                <img src="../img/macro.png" alt="macro-organismes" class="type-circle top">
             </div>
-            <div class="cross-icon right">
-                <img src="path-to-flask-icon.svg" alt="Substances chimiques" width="50">
+            <div class="type-circle right">
+                <img src="../img/mediateur.png" alt="médiateurs chimiques" class="type-circle right">
             </div>
-            <div class="cross-icon bottom">
-                <img src="path-to-tree-icon.svg" alt="Substances naturelles" width="50">
+            <div class="type-circle bottom">
+                <img src="../img/substance.png" alt="substances naturelles" class="type-circle bottom">
             </div>
-            <div class="cross-icon left">
-                <img src="path-to-bacteria-icon.svg" alt="Micro-organismes" width="50">
+            <div class="type-circle left">
+                <img src="../img/micro.png" alt="micro-organismes" class="type-circle left">
             </div>
         </div>
     </div>
-
-    <div class="types-pratiques-container">
-        <div class="chart-block">
-            <h2 class="chart-title">Répartition des Méthodes</h2>
-            <div class="pie-chart">
-                <svg viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(0, 195, 229, 0.5)" stroke-width="10" stroke-dasharray="25 75"/>
-                    <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255, 126, 0, 0.5)" stroke-width="10" stroke-dasharray="25 75" stroke-dashoffset="-25"/>
-                    <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255, 193, 7, 0.5)" stroke-width="10" stroke-dasharray="25 75" stroke-dashoffset="-50"/>
-                    <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(76, 175, 80, 0.5)" stroke-width="10" stroke-dasharray="25 75" stroke-dashoffset="-75"/>
-                </svg>
+    <div class="biocontrol-sections">
+        <!-- Micro-organismes -->
+        <div class="biocontrol-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <img src="../img/micro.png" alt="micro-organismes" class="section-icon">
+                </div>
+                <h2 class="section-title">Les micro-organismes ▼ <h2>
+            </div>
+           
+            <div class="section-content">
+                <div class="section-text">
+                    <h3>Les micro-organismes : des agents pathogènes au service des cultures</h3>
+                    <p>Les micro-organismes, tels que les bactéries, champignons et virus, sont une autre méthode essentielle du biocontrôle. Ils agissent comme des agents pathogènes pour les ravageurs ou les maladies fongiques. Par exemple, la bactérie Bacillus thuringiensis (Bt) produit des toxines naturelles qui ciblent les larves d'insectes nuisibles sans affecter les organismes non-ciblés. Les champignons comme Beauveria bassiana infectent directement les insectes, les affaiblissent jusqu'à leur mort, cette méthode est particulièrement utile dans des conditions où les populations de ravageurs sont très denses. Cependant, l'efficacité des micro-organismes peut être influencée par des facteurs environnementaux tels que la température ou l'humidité, ce qui en limite parfois l'utilisation en extérieur.</p>
+                </div>
+                <div class="section-image">
+                    <img src="../img/image1.png" class="section-image">
+                </div>
             </div>
         </div>
-
-        <div class="types-block">
-            <div class="type-card">
-                <div class="type-header">
-                    <div class="type-icon" style="background: rgba(0, 195, 229, 0.2); border: 2px solid rgba(0, 195, 229, 0.5)">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(0, 195, 229, 1)">
-                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
-                        </svg>
-                    </div>
-                    <h3 class="type-title">Macro-organismes</h3>
+     
+        <!-- Macro-organismes -->
+        <div class="biocontrol-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <img src="../img/macro.png" alt="macro-organismes" class="section-icon">
                 </div>
-                <p class="type-description">Invertébrés, insectes et acariens utilisés pour le contrôle naturel des ravageurs.</p>
+                <h2 class="section-title">Les macro-organismes ▼</h2>
             </div>
-
-            <div class="type-card">
-                <div class="type-header">
-                    <div class="type-icon" style="background: rgba(255, 126, 0, 0.2); border: 2px solid rgba(255, 126, 0, 0.5)">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255, 126, 0, 1)">
-                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
-                        </svg>
-                    </div>
-                    <h3 class="type-title">Micro-organismes</h3>
+            <div class="section-content">
+                <div class="section-text">
+                    <h3>Les macro-organismes : les alliés vivants de l'agriculture</h3>
+                    <p>Les macro-organismes regroupent des auxiliaires biologiques comme les insectes, les acariens et les nématodes. Ces organismes sont introduits dans les cultures pour lutter contre les nuisibles de manière directe. Par exemple, les coccinelles, bien connues pour leur efficacité, se nourrissent des pucerons, limitant ainsi leur prolifération. Les guêpes parasitoïdes, quant à elles, pondent leurs œufs dans les larves des ravageurs, ce qui empêche ces derniers de se développer. Ces auxiliaires sont particulièrement adaptés aux cultures en serres, où il est possible de créer des conditions favorables à leur action. Bien que cette méthode soit durable et efficace, elle peut être limitée par les besoins spécifiques des macro-organismes, notamment en termes de climat ou de diversité biologique.</p>
                 </div>
-                <p class="type-description">Champignons, bactéries et virus bénéfiques pour la protection des cultures.</p>
-            </div>
-
-            <div class="type-card">
-                <div class="type-header">
-                    <div class="type-icon" style="background: rgba(255, 193, 7, 0.2); border: 2px solid rgba(255, 193, 7, 0.5)">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255, 193, 7, 1)">
-                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
-                        </svg>
-                    </div>
-                    <h3 class="type-title">Médiateurs chimiques</h3>
+                <div class="section-image">
+                    <img src="../img/image2.png" class="section-image">
                 </div>
-                <p class="type-description">Phéromones et substances naturelles pour la confusion des ravageurs.</p>
-            </div>
-
-            <div class="type-card">
-                <div class="type-header">
-                    <div class="type-icon" style="background: rgba(76, 175, 80, 0.2); border: 2px solid rgba(76, 175, 80, 0.5)">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(76, 175, 80, 1)">
-                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
-                        </svg>
-                    </div>
-                    <h3 class="type-title">Substances naturelles</h3>
-                </div>
-                <p class="type-description">Extraits végétaux et minéraux pour stimuler les défenses naturelles.</p>
             </div>
         </div>
-    </div>
-
-    <div class="circular-bg">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-    </div>
+     
+        <!-- Médiateurs chimiques -->
+        <div class="biocontrol-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <img src="../img/mediateur.png" alt="médiateurs chimiques" class="section-icon">
+                </div>
+                <h2 class="section-title">Les médiateurs chimiques ▼</h2>
+            </div>
+            <div class="section-content">
+                <div class="section-text">
+                    <h3>Les médiateurs chimiques : influencer les comportements des nuisibles</h3>
+                    <p>Les médiateurs chimiques regroupent des substances naturelles qui perturbent le comportement ou la physiologie des ravageurs. Les phéromones, par exemple, sont largement utilisées pour attirer les mâles d'une espèce donnée dans des pièges ou pour les désorienter afin qu'ils ne trouvent pas les femelles. Cette technique, connue sous le nom de confusion sexuelle, est très chère et respect les écosystèmes environnants. Les substances quant à elles, sont substances qui attirent les ennemis naturels des nuisibles vers les zones infestées, renforçant ainsi leur efficacité. Ces médiateurs offrent une solution élégante et non-destructive, bien qu'ils nécessitent souvent une application régulière pour maintenir leur efficacité.</p>
+                </div>
+                <div class="section-image">
+                    <img src="../img/image3.png" class="section-image">
+                </div>
+            </div>
+        </div>
+     
+        <!-- Substances naturelles -->
+        <div class="biocontrol-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <img src="../img/substance.png" alt="substances naturelles" class="section-icon">
+                </div>
+                <h2 class="section-title">Les substances naturelles ▼ </h2>
+            </div>
+            <div class="section-content">
+                <div class="section-text">
+                    <h3>Les substances naturelles : des solutions inspirées par la nature</h3>
+                    <p>Enfin, les substances naturelles, qu'il s'agisse d'extraits végétaux, d'huiles essentielles ou de minéraux, complètent le panel des outils de biocontrôle. Par exemple, l'huile de neem, extraite des graines d'un arbre tropical, agit comme un insecticide et un répulsif efficace contre de nombreux ravageurs. Les argiles, comme la kaolinite, forment une barrière physique sur les feuilles des plantes, empêchant les insectes de s'y poser ou de s'alimenter. Ces substances sont biodégradables, faciles à appliquer et peu coûteuses, bien qu'elles soient souvent limitées par leur persistance dans le temps et leur sensibilité aux conditions météorologiques.</p>
+                </div>
+                <div class="section-image">
+                    <img src="../img/image4.jpg" class="section-image">
+                </div>
+            </div>
+        </div>
+     </div>
+     
+     <div class="synergy-section">
+        <h2>Une synergie pour une efficacité optimale</h2>
+        <div class="synergy-card">
+            <p>Chacune de ces méthodes présente des avantages spécifiques et répond à des besoins différents selon les cultures, les nuisibles ciblés et les conditions environnementales. Cependant, leur combinaison peut offrir une efficacité accrue et une meilleure résilience face aux menaces agricoles. Le biocontrôle n'est pas seulement une alternative aux pesticides chimiques, mais un véritable changement de paradigme vers une agriculture plus respectueuse de l'environnement et plus durable.</p>
+        </div>
+        <a href="quiz.html" class="test-btn">Tester mes connaissances</a>
+     </div>
 
     <script src="../js/script.js"></script>
 </body>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioData - Quiz </title>
+    <link rel="stylesheet" href="../css/style.css">
+ 
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+<body>
+    <div class="stars"></div>
+    
+    <a href="index.html" class="back-btn" title="Retour à l'accueil">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M19 12H5M11 18l-6-6 6-6"/>
+        </svg>
+    </a>
+
+    <nav>
+        <div class="logo">
+            <video class="logo-video" autoplay loop muted>
+                <source src="../logo/logobiodata.mp4" type="video/mp4">
+            </video>
+            BioData
+        </div>
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="../index.html">Accueil</a>
+                <a href="./analyse.html">Analyses</a>
+                <a href="./cours.html">Cours</a>
+                <a href="./quiz.html" class="active">Quiz</a>
+                
+
+            </div>
+        </div>
+        <a href="../html/contact.html" class="register-btn">contact</a>
+    </nav>
+    
+        <div class="quiz-container">
+            <h1>Quiz</h1>
+            <h2>Maîtriser le biocontrôle</h2>
+            <div id="quiz-content"></div>
+        </div>
+    
+        <script src="../js/script.js"></script>
+</body>
+</html>
