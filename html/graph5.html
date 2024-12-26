@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contexte Agricole</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Contexte Agricole et conditions expérimentales</h1>
+  <canvas id="chartPage5" width="400" height="200"></canvas>
+
+  <script>
+    fetch('../csvjson.json')
+      .then(response => response.json())
+      .then(data => {
+        const counts = {};
+        data.forEach(row => {
+          const culture = row["Cultures"];
+          counts[culture] = (counts[culture] || 0) + 1;
+        });
+        const labels = Object.keys(counts);
+        const values = Object.values(counts);
+
+        new Chart(document.getElementById('chartPage5'), {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Nombre d\'Applications',
+              data: values,
+              backgroundColor: 'rgba(54, 162, 235, 0.5)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: { responsive: true }
+        });
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caractéristiques</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Caractéristiques des méthodes et traitement</h1>
+  <canvas id="chartPage2" width="400" height="200"></canvas>
+
+  <script>
+    fetch('../csvjson.json')
+      .then(response => response.json())
+      .then(data => {
+        const counts = {};
+        data.forEach(row => {
+          const type = row["Type de traitement"];
+          const part = row["Partie traitée"];
+          counts[type] = counts[type] || {};
+          counts[type][part] = (counts[type][part] || 0) + 1;
+        });
+        const labels = Object.keys(counts);
+        const datasets = Object.keys(counts[labels[0]]).map(part => ({
+          label: part,
+          data: labels.map(label => counts[label][part] || 0),
+          backgroundColor: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.5)`
+        }));
+
+        new Chart(document.getElementById('chartPage2'), {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: datasets
+          },
+          options: { responsive: true, plugins: { legend: { display: true } } }
+        });
+      });
+  </script>
+</body>
+</html>

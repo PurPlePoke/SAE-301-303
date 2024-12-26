@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classification</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Identification et classification des Méthodes</h1>
+  <canvas id="chartPage1" width="400" height="200"></canvas>
+
+  <script>
+    fetch('../csvjson.json')
+      .then(response => response.json())
+      .then(data => {
+        const counts = {};
+        data.forEach(row => {
+          const family = row["Famille méthode de contrôle biologique"];
+          counts[family] = (counts[family] || 0) + 1;
+        });
+        const labels = Object.keys(counts);
+        const values = Object.values(counts);
+
+        new Chart(document.getElementById('chartPage1'), {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Nombre de Méthodes',
+              data: values,
+              backgroundColor: 'rgba(75, 192, 192, 0.5)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: { responsive: true }
+        });
+      });
+  </script>
+</body>
+</html>

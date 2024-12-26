@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conditions</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Conditions d'Application</h1>
+  <canvas id="chartPage4" width="400" height="200"></canvas>
+
+  <script>
+    fetch('../csvjson.json')
+      .then(response => response.json())
+      .then(data => {
+        const counts = {};
+        data.forEach(row => {
+          const stage = row["Stade d'application"];
+          counts[stage] = (counts[stage] || 0) + 1;
+        });
+        const labels = Object.keys(counts);
+        const values = Object.values(counts);
+
+        new Chart(document.getElementById('chartPage4'), {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Nombre d\'Applications',
+              data: values,
+              borderColor: 'rgba(153, 102, 255, 1)',
+              fill: false
+            }]
+          },
+          options: { responsive: true }
+        });
+      });
+  </script>
+</body>
+</html>
