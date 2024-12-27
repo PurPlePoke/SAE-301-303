@@ -1,42 +1,152 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Classification</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <h1>Identification et classification des Méthodes</h1>
-  <canvas id="chartPage1" width="400" height="200"></canvas>
+    <div class="stars"></div>
+    
+    <a href="../html/analyse.html" class="back-btn" title="Retour à l'accueil">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M19 12H5M11 18l-6-6 6-6"/>
+        </svg>
+    </a>
 
-  <script>
-    fetch('../csvjson.json')
-      .then(response => response.json())
-      .then(data => {
-        const counts = {};
-        data.forEach(row => {
-          const family = row["Famille méthode de contrôle biologique"];
-          counts[family] = (counts[family] || 0) + 1;
-        });
-        const labels = Object.keys(counts);
-        const values = Object.values(counts);
+    <nav>
+        <div class="logo">
+            <video class="logo-video" autoplay loop muted>
+                <source src="../logo/logobiodata.mp4" type="video/mp4">
+            </video>
+            BioData
+        </div>
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="../index.html">Accueil</a>
+                <a href="./analyse.html" class="active">Analyses</a>
+                <a href="./cours.html">Cours</a>
+                <a href="./quiz.html">Quiz</a>
+            </div>
+        </div>
+        <a href="../html/contact.html" class="register-btn">contact</a>
+    </nav>
+    
+    <div class="chart-container" style="position: relative; height:60vh; width:80vw; margin:40px auto; padding:20px; background:rgba(0,0,0,0.5); border-radius:10px;">
+        <h1 style="text-align: center; color: white; margin-bottom:30px;">Identification et classification des Méthodes</h1>
+        <canvas id="chartPage1"></canvas>
+        <div id="error-message" style="color: red; text-align: center; margin-top: 20px;"></div>
+    </div>
 
-        new Chart(document.getElementById('chartPage1'), {
-          type: 'bar',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: 'Nombre de Méthodes',
-              data: values,
-              backgroundColor: 'rgba(75, 192, 192, 0.5)',
-              borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1
-            }]
-          },
-          options: { responsive: true }
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM chargé');
+            console.log('Tentative de chargement du fichier JSON...');
+            
+            fetch('../csvjson.json')
+                .then(response => {
+                    console.log('Réponse reçue:', response);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Données JSON reçues:', data);
+                    const counts = {};
+                    data.forEach(row => {
+                        const family = row["Famille méthode de contrôle biologique"];
+                        if (family) {
+                            counts[family] = (counts[family] || 0) + 1;
+                        }
+                    });
+                    
+                    console.log('Comptage effectué:', counts);
+                    const ctx = document.getElementById('chartPage1');
+                    
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: Object.keys(counts),
+                            datasets: [{
+                                label: 'Nombre de Méthodes',
+                                data: Object.values(counts),
+                                backgroundColor: [
+                                    'rgba(75, 192, 192, 0.6)',
+                                    'rgba(255, 99, 132, 0.6)',
+                                    'rgba(54, 162, 235, 0.6)',
+                                    'rgba(255, 206, 86, 0.6)',
+                                    'rgba(153, 102, 255, 0.6)'
+                                ],
+                                borderColor: [
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(153, 102, 255, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                    ticks: { color: 'white' }
+                                },
+                                x: {
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                    ticks: {
+                                        color: 'white',
+                                        maxRotation: 45,
+                                        minRotation: 45
+                                    }
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    labels: { color: 'white' }
+                                }
+                            }
+                        }
+                    });
+                    console.log('Graphique créé');
+                })
+                .catch(error => {
+                    console.error('Erreur détaillée:', error);
+                    document.getElementById('error-message').textContent = 
+                        `Erreur lors du chargement des données: ${error.message}`;
+                });
         });
-      });
-  </script>
+    </script>
+
+<footer class="text-light py-4">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <div class="mb-3 mb-md-0">
+            <span>© 2024 BioData, Tous droits réservés.</span>
+        </div>
+        <ul class="nav justify-content-center mt-3 mt-md-0">
+            <li class="nav-item">
+                <a class="nav-link px-2 text-light" href="#"><i class="bi bi-twitter"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-2 text-light" href="#"><i class="bi bi-instagram"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-2 text-light" href="#"><i class="bi bi-facebook"></i></a>
+            </li>
+        </ul>
+    </div>
+</footer>
+
+    <script src="../js/script.js"></script>
 </body>
 </html>

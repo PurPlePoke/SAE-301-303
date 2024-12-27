@@ -11,6 +11,11 @@ body {
     color: white;
     position: relative;
     overflow-x: hidden;
+    
+}
+
+footer{
+    padding-bottom: 200px;
 }
 
 /* Effet de lumière ambiant */
@@ -192,20 +197,19 @@ nav {
 }
 
 .stats-card {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    padding: 1.5rem;
-    border-radius: 15px;
+    backdrop-filter: blur(10px); /* Effet de flou */
     left: 10%;
-    bottom: 20%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    bottom: 10%;
+    position: absolute;
+    
 }
 
-.stats-card .percentage {
-    font-size: 2rem;
-    color: #ff3399;
-    font-weight: bold;
+@media (max-width: 768px) {
+    .stats-card {
+        top: 75%; 
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }
 
 .circular-bg {
@@ -782,9 +786,10 @@ nav {
 }
 /**************************** analyse ********************************************************/
 .hero1 {
-    top: 100px;
+    top: 80px;
     text-align: center;
-    padding: 4rem 2rem;
+    padding:20px;
+    padding-bottom: 200px;
     position: relative;
     z-index: 1;
 

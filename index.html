@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BioData - Biocontrôle</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/style.css">
+
 </head>
+
 <body>
     <div class="stars"></div>
-    
+
     <nav>
         <div class="logo">
             <video class="logo-video" autoplay loop muted>
@@ -18,43 +24,68 @@
         </div>
         <div class="nav-container">
             <div class="nav-links">
-                <a href="./index.html" class="active">Accueil</a>     
+                <a href="./index.html" class="active">Accueil</a>
                 <a href="./html/analyse.html">Analyses</a>
                 <a href="./html/cours.html">Cours</a>
                 <a href="./html/quiz.html">Quiz</a>
-                
+
 
             </div>
         </div>
-        <a href="../html/contact.html" class="register-btn">contact</a>
+        <a href="./html/contact.html" class="register-btn">contact</a>
     </nav>
 
     <div class="hero">
         <h1>Données précises, <br>biocontrôle optimisé</h1>
-        <p>Transformer les données brutes en informations significatives pour des décisions <br>plus éclairées dans le domaine du biocontrôle.</p>
+        <p>Transformer les données brutes en informations significatives pour des décisions <br>plus éclairées dans le
+            domaine du biocontrôle.</p>
         <div class="action-buttons">
-            <a href="../html/cours.html" class="action-btn">
+            <a href="./html/cours.html" class="action-btn">
                 EN SAVOIR +
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                    <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
             </a>
 
         </div>
     </div>
 
-    <div class="stats-card">
-        <div class="percentage">13,5 %</div>
-        <div>d'infestations réduites</div>
-        <small style="opacity: 0.6">en 2023</small>
+    <div class="position-absolute bg-light bg-opacity-10 p-4 rounded-3 border border-light-subtle stats-card">
+        <div class="fs-3 fw-bold text-danger percentage">13,5 %</div>
+        <div class="text-white">d'infestations réduites</div>
+        <small class="text-white-50">en 2023</small>
     </div>
-
+    
     <div class="circular-bg">
         <div class="circle"></div>
         <div class="circle"></div>
         <div class="circle"></div>
     </div>
 
+    <footer class="text-light py-4">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+                <span>© 2024 BioData, Tous droits réservés.</span>
+            </div>
+            <ul class="nav justify-content-center mt-3 mt-md-0">
+                <li class="nav-item">
+                    <a class="nav-link px-2 text-light" href="#"><i class="bi bi-twitter"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-2 text-light" href="#"><i class="bi bi-instagram"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-2 text-light" href="#"><i class="bi bi-facebook"></i></a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/script.js"></script>
 </body>
+
+
+
 </html>

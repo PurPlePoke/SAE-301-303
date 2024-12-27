@@ -1,88 +1,171 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Efficacité et Groupe Cible</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efficacité et Groupe Cible</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <h1>Efficacité et Groupe Cible</h1>
-  <canvas id="chartPage3" width="400" height="200"></canvas>
-  
-  <script>
-    fetch('../csvjson.json')
-      .then(response => response.json())
-      .then(data => {
-        // Mapping pour les niveaux d'efficacité
-        const efficiencyMapping = { "Bon": 80, "Mitigé": 50, "Aucun avis émis": 30 };
+    <div class="stars"></div>
+    
+    <a href="../html/analyse.html" class="back-btn" title="Retour à l'accueil">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M19 12H5M11 18l-6-6 6-6"/>
+        </svg>
+    </a>
 
-        // Préparation des données
-        const datasets = {};
-        data.forEach(row => {
-          const group = row["Groupe ciblé"];
-          const mode = row["Mode d'action"];
-          const efficiency = efficiencyMapping[row["Niveau de satisfaction de l'utilisation de la méthode"]] || 0;
+    <nav>
+        <div class="logo">
+            <video class="logo-video" autoplay loop muted>
+                <source src="../logo/logobiodata.mp4" type="video/mp4">
+            </video>
+            BioData
+        </div>
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="../index.html">Accueil</a>
+                <a href="./analyse.html" class="active">Analyses</a>
+                <a href="./cours.html">Cours</a>
+                <a href="./quiz.html">Quiz</a>
+            </div>
+        </div>
+        <a href="../html/contact.html" class="register-btn">contact</a>
+    </nav>
 
-          // Vérification des données valides
-          if (group && mode && efficiency > 0) {
-            if (!datasets[mode]) {
-              datasets[mode] = [];
-            }
-            datasets[mode].push({
-              x: group,
-              y: efficiency,
-            });
-          }
+    <div class="chart-container" style="position: relative; height:60vh; width:80vw; margin:40px auto; padding:20px; background:rgba(0,0,0,0.5); border-radius:10px;">
+        <h1 style="text-align: center; color: white; margin-bottom:30px;">Efficacité et Groupe Cible</h1>
+        <canvas id="chartPage3"></canvas>
+        <div id="error-message" style="color: red; text-align: center; margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM chargé');
+            
+            fetch('../csvjson.json')
+                .then(response => {
+                    console.log('Réponse reçue:', response);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Données JSON reçues:', data);
+                    
+                    const efficiencyMapping = {
+                        "Bon": 80,
+                        "Mitigé": 50,
+                        "Aucun avis émis": 30
+                    };
+
+                    const datasets = {};
+                    data.forEach(row => {
+                        const group = row["Groupe ciblé"];
+                        const mode = row["Mode d'action"];
+                        const efficiency = efficiencyMapping[row["Niveau de satisfaction de l'utilisation de la méthode"]] || 0;
+
+                        if (group && mode && efficiency > 0) {
+                            if (!datasets[mode]) {
+                                datasets[mode] = [];
+                            }
+                            datasets[mode].push({
+                                x: group,
+                                y: efficiency,
+                            });
+                        }
+                    });
+
+                    const colors = [
+                        { bg: 'rgba(75, 192, 192, 0.6)', border: 'rgba(75, 192, 192, 1)' },
+                        { bg: 'rgba(255, 99, 132, 0.6)', border: 'rgba(255, 99, 132, 1)' },
+                        { bg: 'rgba(54, 162, 235, 0.6)', border: 'rgba(54, 162, 235, 1)' },
+                        { bg: 'rgba(255, 206, 86, 0.6)', border: 'rgba(255, 206, 86, 1)' },
+                        { bg: 'rgba(153, 102, 255, 0.6)', border: 'rgba(153, 102, 255, 1)' }
+                    ];
+
+                    const chartDatasets = Object.keys(datasets).map((mode, index) => ({
+                        label: mode,
+                        data: datasets[mode],
+                        backgroundColor: colors[index % colors.length].bg,
+                        borderColor: colors[index % colors.length].border,
+                        borderWidth: 1
+                    }));
+
+                    new Chart(document.getElementById('chartPage3'), {
+                        type: 'scatter',
+                        data: { datasets: chartDatasets },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: {
+                                    type: 'category',
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                    ticks: { 
+                                        color: 'white',
+                                        maxRotation: 45,
+                                        minRotation: 45
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'Groupes ciblés',
+                                        color: 'white'
+                                    }
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    min: 0,
+                                    max: 100,
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                    ticks: { color: 'white' },
+                                    title: {
+                                        display: true,
+                                        text: 'Efficacité moyenne (%)',
+                                        color: 'white'
+                                    }
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                    labels: { color: 'white' }
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Erreur détaillée:', error);
+                    document.getElementById('error-message').textContent = 
+                        `Erreur lors du chargement des données: ${error.message}`;
+                });
         });
+    </script>
 
-        // Transformer les données en datasets pour Chart.js
-        const chartDatasets = Object.keys(datasets).map(mode => ({
-          label: mode,
-          data: datasets[mode],
-          backgroundColor: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.5)`,
-          borderColor: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 1)`,
-          borderWidth: 1,
-        }));
+<footer class="text-light py-4">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <div class="mb-3 mb-md-0">
+            <span>© 2024 BioData, Tous droits réservés.</span>
+        </div>
+        <ul class="nav justify-content-center mt-3 mt-md-0">
+            <li class="nav-item">
+                <a class="nav-link px-2 text-light" href="#"><i class="bi bi-twitter"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-2 text-light" href="#"><i class="bi bi-instagram"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-2 text-light" href="#"><i class="bi bi-facebook"></i></a>
+            </li>
+        </ul>
+    </div>
+</footer>
 
-        // Création du graphique
-        new Chart(document.getElementById('chartPage3'), {
-          type: 'scatter',
-          data: {
-            datasets: chartDatasets,
-          },
-          options: {
-            responsive: true,
-            scales: {
-              x: {
-                type: 'category',
-                title: {
-                  display: true,
-                  text: 'Groupes ciblés',
-                },
-              },
-              y: {
-                title: {
-                  display: true,
-                  text: 'Efficacité moyenne (%)',
-                },
-                min: 0,
-                max: 100,
-              },
-            },
-            plugins: {
-              legend: {
-                display: true,
-                position: 'bottom',
-              },
-            },
-          },
-        });
-      })
-      .catch(error => {
-        console.error('Erreur lors du chargement des données :', error);
-        alert("Impossible de charger les données !");
-      });
-  </script>
 </body>
 </html>
